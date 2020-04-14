@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luke Matrices</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <script src="/static/js/main.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class='pageHeader'>
+        <h1>Matrix Calculator (by Luke)</h1>
+    </div>
+    <div class='pageContent'>
+        
+        <!-- matrix input area (expandable) -->
+        <div class='matrixInputArea'>
+            
+            <!-- One table to start with -->
+            <form method="POST" id="inputTable_form">
+                <div class="inputTable">
+                    <label class='inputTable_label' for="inputTable__table_1">First Matrix</label>
+                    <table id='inputTable__table_1' class="inputTable__table">
+                        {% for letter in rows -%}
+                        <tr>
+                            {% for index in cols %}
+                            <td>
+                                <input form="inputTable_form" 
+                                type="text" 
+                                id={{letter+index}} 
+                                class='firstArray' 
+                                required minlength="1" 
+                                maxlength="3" 
+                                size="1">
+                            </td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </form>
+            <div id="inputArrayTools">
+                <input type="button" value="+" id="addInputArray">
+                <input type="button" value="-" id="removeInputArray">
+            </div>
+        </div>
+
+        <!-- tool area to modify the matrix -->
+        <!-- needs to send data back to the server -->
+        <div id='transformTools'>
+            <input type="button" value="Transpose" id='transposeButton'>
+            <input type="button" value="Multiply" id='multiplyButton'>
+            <input type="button" value="Add" id="addButton">
+            <input type="button" value="Subtract" id="subtractButton">
+        </div>
+
+        <!-- output area for response data -->
+        <div id='outputArea'>
+            
+        </div>
+    </div>
+
+    <script>
+        // inputArrayTools area
+        document.getElementById("addInputArray").onclick = addInputArea;
+        document.getElementById("removeInputArray").onclick = removeInputArea;
+
+        document.getElementById("transposeButton").onclick = transpose;
+        document.getElementById("multiplyButton").onclick = multiply;
+        document.getElementById("addButton").onclick = add;
+        document.getElementById("subtractButton").onclick = subtract;    
+    </script>
+</body>
+</html>
